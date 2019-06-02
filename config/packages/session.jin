@@ -7,7 +7,7 @@
 	;
 
 	aliases = {
-		"Aura\Session\Session": "Hiraeth\Session\ManagerInterface"
+		"Hiraeth\Session\ManagerInterface": "Aura\Session\Session"
 	}
 
 	;
