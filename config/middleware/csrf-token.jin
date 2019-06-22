@@ -10,10 +10,10 @@
 	; The priority for the middleware
 	;
 
-	priority = 10
+	priority = 60
 
 	;
 	; The middleware class
 	;
 
-	class = Hiraeth\Session\StartSessionMiddleware
+	class = Hiraeth\Session\CsrfTokenMiddleware
