@@ -21,7 +21,8 @@
     "extra": {
         "opus": {
             "hiraeth/app": {
-                "config": ""
+                "config": "",
+		"resources": ""
             }
         }
     }
