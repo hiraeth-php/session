@@ -45,3 +45,9 @@
 	extensions = [
 		"Hiraeth\Session\Twig\SessionExtension"
 	]
+
+[templates]
+
+	paths = {
+		"flash": "resources/flash"
+	}
