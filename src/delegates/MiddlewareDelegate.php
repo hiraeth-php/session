@@ -26,7 +26,7 @@ class MiddlewareDelegate implements Hiraeth\Delegate
 	 */
 	static public function getClass(): string
 	{
-		return Ellipse\Session\StartSessionMiddleware::class;
+		return StartSessionMiddleware::class;
 	}
 
 
@@ -50,7 +50,7 @@ class MiddlewareDelegate implements Hiraeth\Delegate
 	 */
 	public function __invoke(Hiraeth\Application $app): object
 	{
-		return new Ellipse\Session\StartSessionMiddleware([
+		return new StartSessionMiddleware([
 			'lifetime' => $app->getEnvironment('SESSION.TTL', ini_get('session.cookie_lifetime')),
 			'httponly' => $app->getEnvironment('SESSION.HTTPONLY', ini_get('session.cookie_httponly')),
 			'domain'   => $app->getEnvironment('SESSION.DOMAIN', ini_get('session.cookie_domain')),
