@@ -35,7 +35,7 @@ class CsrfTokenMiddleware implements MiddlewareInterface
 	/**
 	 *
 	 */
-	public function __construct(ManagerInterface $session_manager, ResponseFactory $response_factory)
+	public function __construct(Manager $session_manager, ResponseFactory $response_factory)
 	{
 		$this->sessionManager  = $session_manager;
 		$this->responseFactory = $response_factory;

@@ -17,6 +17,12 @@ class ManagerDelegate implements Hiraeth\Delegate
 
 
 	/**
+	 *
+	 */
+	protected $factory = NULL;
+
+
+	/**
 	 * Get the class for which the delegate operates.
 	 *
 	 * @static

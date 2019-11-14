@@ -3,19 +3,25 @@
 namespace Hiraeth\Session\Twig;
 
 use Hiraeth\Session;
+
+use Twig\Extension;
 use Twig\TwigFunction;
-use Twig\Extension\AbstractExtension;
-use Twig\Extension\GlobalsInterface;
 
 /**
  *
  */
-class SessionExtension extends AbstractExtension implements GlobalsInterface
+class SessionExtension extends Extension\AbstractExtension implements Extension\GlobalsInterface
 {
 	/**
 	 *
 	 */
-	public function __construct(Session\ManagerInterface $manager)
+	protected $manager = NULL;
+
+
+	/**
+	 *
+	 */
+	public function __construct(Session\Manager $manager)
 	{
 		$this->manager = $manager;
 	}

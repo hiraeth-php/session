@@ -1,6 +1,8 @@
 {
     "name": "hiraeth/session",
-    "description": "Session handling via Aura.Session for the Hiraeth Nano Framework",
+    "description": "Session handling for the Hiraeth Nano Framework",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "license": "MIT",
     "authors": [
         {
@@ -13,6 +15,10 @@
         "hiraeth/app": "^2.0",
         "aura/session": "^2.1",
         "ellipse/session-start": "^1.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.11.19",
+        "hiraeth/twig": "^2.0"
     },
     "autoload": {
         "classmap": ["src/"]

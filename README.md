@@ -1,1 +1,1 @@
-This package provides session handling via Aura.Session for the Hiraeth Nano Framework
+This package provides session handling for the Hiraeth Nano Framework
