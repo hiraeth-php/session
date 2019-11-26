@@ -68,7 +68,7 @@ class StartMiddleware implements Middleware
 				session_id($session_id);
 			}
 
-			if (session_start([$this->startOptions])) {
+			if (session_start($this->startOptions)) {
 				$response = $handler->handle($request);
 
 				if (session_status() === PHP_SESSION_NONE) {
