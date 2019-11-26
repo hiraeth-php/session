@@ -10,7 +10,7 @@
 	; The priority for the middleware
 	;
 
-	priority = 10
+	priority = 8
 
 	;
 	; The middleware class
