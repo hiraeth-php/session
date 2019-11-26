@@ -27,7 +27,7 @@
 	;
 
 	providers = [
-
+		"Hiraeth\Session\ManagerSetterProvider"
 	]
 
 [twig]
