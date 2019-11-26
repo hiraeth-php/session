@@ -7,7 +7,7 @@ use Hiraeth;
 /**
  * {@inheritDoc}
  */
-class ManagerSetterProvider implements Hiraeth\Provider
+class ManagedInterfaceProvider implements Hiraeth\Provider
 {
 	/**
 	 * {@inheritDoc}
@@ -15,7 +15,7 @@ class ManagerSetterProvider implements Hiraeth\Provider
 	static public function getInterfaces(): array
 	{
 		return [
-			ManagerSetter::class
+			ManagedInterface::class
 		];
 	}
 

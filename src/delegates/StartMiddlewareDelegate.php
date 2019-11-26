@@ -3,20 +3,19 @@
 namespace Hiraeth\Session;
 
 use Hiraeth;
-use Ellipse;
 use SessionHandlerInterface;
 
 /**
  * {@inheritDoc}
  */
-class MiddlewareDelegate implements Hiraeth\Delegate
+class StartMiddlewareDelegate implements Hiraeth\Delegate
 {
 	/**
 	 * {@inheritDoc}
 	 */
 	static public function getClass(): string
 	{
-		return StartSessionMiddleware::class;
+		return StartMiddleware::class;
 	}
 
 
@@ -36,7 +35,7 @@ class MiddlewareDelegate implements Hiraeth\Delegate
 	 */
 	public function __invoke(Hiraeth\Application $app): object
 	{
-		return new StartSessionMiddleware([
+		return new StartMiddleware([
 			'lifetime' => $app->getEnvironment('SESSION.TTL', ini_get('session.cookie_lifetime')),
 			'httponly' => $app->getEnvironment('SESSION.HTTPONLY', ini_get('session.cookie_httponly')),
 			'domain'   => $app->getEnvironment('SESSION.DOMAIN', ini_get('session.cookie_domain')),

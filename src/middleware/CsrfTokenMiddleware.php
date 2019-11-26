@@ -12,8 +12,10 @@ use Psr\Http\Message\ResponseFactoryInterface as ResponseFactory;
 /**
  * {@inheritDoc}
  */
-class CsrfTokenMiddleware implements MiddlewareInterface
+class CsrfTokenMiddleware implements MiddlewareInterface, ManagedInterface
 {
+	use ManagedTrait;
+
 	/**
 	 * Methods which require CSRF validation
 	 *
@@ -25,25 +27,17 @@ class CsrfTokenMiddleware implements MiddlewareInterface
 	/**
 	 * A PSR-17 response factory
 	 *
-	 * @var ResponseFactory
+	 * @var ResponseFactory|null
 	 */
 	protected $factory = NULL;
 
-
-	/**
-	 * The session manager
-	 *
-	 * @var Manager
-	 */
-	protected $manager = NULL;
 
 
 	/**
 	 * Create a new instance of the middleware
 	 */
-	public function __construct(Manager $manager, ResponseFactory $factory)
+	public function __construct(ResponseFactory $factory)
 	{
-		$this->manager = $manager;
 		$this->factory = $factory;
 	}
 
@@ -53,10 +47,10 @@ class CsrfTokenMiddleware implements MiddlewareInterface
 	 */
 	public function process(Request $request, RequestHandler $handler): Response
 	{
-		if ($this->manager->isStarted() && in_array($request->getMethod(), static::$methods)) {
+		if ($this->hasSession() && in_array($request->getMethod(), static::$methods)) {
 
 			$csrf_value = $request->getParsedBody()['csrf::token'] ?? '';
-			$csrf_token = $this->manager->getCsrfToken();
+			$csrf_token = $this->session->getCsrfToken();
 
 			if (!$csrf_token->isValid($csrf_value)) {
 				return $this->factory->createResponse(400);

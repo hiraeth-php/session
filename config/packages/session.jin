@@ -18,7 +18,7 @@
 
 	delegates = [
 		"Hiraeth\Session\ManagerDelegate",
-		"Hiraeth\Session\MiddlewareDelegate"
+		"Hiraeth\Session\StartMiddlewareDelegate"
 	]
 
 	;
@@ -27,7 +27,7 @@
 	;
 
 	providers = [
-		"Hiraeth\Session\ManagerSetterProvider"
+		"Hiraeth\Session\ManagedInterfaceProvider"
 	]
 
 [twig]
@@ -39,7 +39,7 @@
 	;
 
 	extensions = [
-		"Hiraeth\Session\Twig\SessionExtension"
+		"Hiraeth\Session\Twig\ManagerExtension"
 	]
 
 [templates]
