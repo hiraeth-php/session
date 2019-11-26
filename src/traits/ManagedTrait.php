@@ -2,6 +2,8 @@
 
 namespace Hiraeth\Session;
 
+use Aura\Session;
+
 /**
  * Enables setting session manager
  */
@@ -27,19 +29,20 @@ trait ManagedTrait
 
 
 	/**
-	 * Get the session manager
-	 */
-	protected function getSession(): ?Manager
-	{
-		return $this->session;
-	}
-
-
-	/**
 	 * Determine whether or not the session mangaer and session exist
 	 */
 	protected function hasSession(): bool
 	{
 		return $this->session && $this->session->isStarted();
 	}
+
+
+	/**
+	 * Get a session segment
+	 */
+	protected function session(string $name): Session\Segment
+	{
+		return $this->session->getSegment($name);
+	}
+
 }
