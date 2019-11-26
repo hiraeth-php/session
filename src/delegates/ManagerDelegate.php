@@ -6,53 +6,34 @@ use Hiraeth;
 use Aura;
 
 /**
- *
+ * {@inheritDoc}
  */
 class ManagerDelegate implements Hiraeth\Delegate
 {
 	/**
-	 *
-	 */
-	protected $caches = array();
-
-
-	/**
-	 *
-	 */
-	protected $factory = NULL;
-
-
-	/**
-	 * Get the class for which the delegate operates.
-	 *
-	 * @static
-	 * @access public
-	 * @return string The class for which the delegate operates
+	 * {@inheritDoc}
 	 */
 	static public function getClass(): string
 	{
-		return Aura\Session\Session::class;
+		return Manager::class;
 	}
 
 
 	/**
-	 *
-	 */
-	public function __construct(Aura\Session\SessionFactory $factory)
-	{
-		$this->factory = $factory;
-	}
-
-
-	/**
-	 * Get the instance of the class for which the delegate operates.
-	 *
-	 * @access public
-	 * @param Hiraeth\Application $app The application instance for which the delegate operates
-	 * @return object The instance of the class for which the delegate operates
+	 * {@inheritDoc}
 	 */
 	public function __invoke(Hiraeth\Application $app): object
 	{
-		return $app->share($this->factory->newInstance([]));
+		$phpfunc = new Aura\Session\Phpfunc;
+		$randval = new Aura\Session\Randval($phpfunc);
+		$cookies = array();
+
+		return $app->share(new Manager(
+			 new Aura\Session\SegmentFactory,
+			 new Aura\Session\CsrfTokenFactory($randval),
+			 $phpfunc,
+			 $cookies,
+			 NULL
+		));
 	}
 }

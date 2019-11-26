@@ -2,24 +2,24 @@
 
 namespace Hiraeth\Session\Twig;
 
+use Twig;
 use Hiraeth\Session;
 
-use Twig\Extension;
-use Twig\TwigFunction;
-
 /**
- *
+ * {@inheritDoc}
  */
-class SessionExtension extends Extension\AbstractExtension implements Extension\GlobalsInterface
+class SessionExtension extends Twig\Extension\AbstractExtension implements Twig\Extension\GlobalsInterface
 {
 	/**
+	 * The session manager
 	 *
+	 * @var Session\Manager
 	 */
 	protected $manager = NULL;
 
 
 	/**
-	 *
+	 * Create a new instance of the extension
 	 */
 	public function __construct(Session\Manager $manager)
 	{
@@ -28,7 +28,7 @@ class SessionExtension extends Extension\AbstractExtension implements Extension\
 
 
 	/**
-	 *
+	 * {@inheritDoc}
 	 */
 	public function getFunctions()
 	{
@@ -37,13 +37,13 @@ class SessionExtension extends Extension\AbstractExtension implements Extension\
 		}
 
 		return [
-			new TwigFunction('session', [$this->manager, 'getSegment'])
+			new Twig\TwigFunction('session', [$this->manager, 'getSegment'])
 		];
 	}
 
 
 	/**
-	 *
+	 * {@inheritDoc}
 	 */
 	public function getGlobals()
 	{

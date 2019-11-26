@@ -2,12 +2,15 @@
 
 namespace Hiraeth\Session;
 
-use Ellipse\Session;
+use Ellipse;
 
 /**
- *
+ * {@inheritDoc}
  */
-class StartSessionMiddleware extends Session\StartSessionMiddleware
+class StartSessionMiddleware extends Ellipse\Session\StartSessionMiddleware
 {
+	//
+	// A concrete alias for Ellipse StartSessionmiddleware
+	//
 
 }

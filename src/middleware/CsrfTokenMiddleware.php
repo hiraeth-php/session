@@ -10,50 +10,56 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseFactoryInterface as ResponseFactory;
 
 /**
- *
+ * {@inheritDoc}
  */
 class CsrfTokenMiddleware implements MiddlewareInterface
 {
 	/**
+	 * Methods which require CSRF validation
 	 *
+	 * @var array
 	 */
 	protected static $methods = ['POST', 'PUT', 'DELETE'];
 
 
 	/**
+	 * A PSR-17 response factory
 	 *
+	 * @var ResponseFactory
 	 */
-	protected $responseFactory = NULL;
+	protected $factory = NULL;
 
 
 	/**
+	 * The session manager
 	 *
+	 * @var Manager
 	 */
-	protected $sessionManager = NULL;
+	protected $manager = NULL;
 
 
 	/**
-	 *
+	 * Create a new instance of the middleware
 	 */
-	public function __construct(Manager $session_manager, ResponseFactory $response_factory)
+	public function __construct(Manager $manager, ResponseFactory $factory)
 	{
-		$this->sessionManager  = $session_manager;
-		$this->responseFactory = $response_factory;
+		$this->manager = $manager;
+		$this->factory = $factory;
 	}
 
 
 	/**
-	 *
+	 * {@inheritDoc}
 	 */
 	public function process(Request $request, RequestHandler $handler): Response
 	{
-		if ($this->sessionManager->isStarted() && in_array($request->getMethod(), static::$methods)) {
+		if ($this->manager->isStarted() && in_array($request->getMethod(), static::$methods)) {
 
 			$csrf_value = $request->getParsedBody()['csrf::token'] ?? '';
-			$csrf_token = $this->sessionManager->getCsrfToken();
+			$csrf_token = $this->manager->getCsrfToken();
 
 			if (!$csrf_token->isValid($csrf_value)) {
-				return $this->responseFactory->createResponse(400);
+				return $this->factory->createResponse(400);
 			}
 		}
 
