@@ -16,4 +16,4 @@
 	; The middleware class
 	;
 
-	class = Hiraeth\Session\StartSessionMiddleware
+	class = Hiraeth\Session\StartMiddleware
