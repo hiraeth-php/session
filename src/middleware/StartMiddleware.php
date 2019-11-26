@@ -45,7 +45,9 @@ class StartMiddleware implements Middleware
 	 */
 	public function __construct(array $options = [])
 	{
-		$this->options = array_change_key_case($options, CASE_LOWER);
+		$this->options = array_change_key_case($options, CASE_LOWER) + [
+			'name' => ini_get('session.name')
+		];
 	}
 
 
@@ -59,28 +61,24 @@ class StartMiddleware implements Middleware
 		}
 
 		if (session_status() !== PHP_SESSION_DISABLED) {
-			$cookies      = $request->getCookieParams();
-			$session_name = $this->options['name']  ?? ini_get('session.name');
-			$session_id   = $cookies[$session_name] ?? NULL;
+			$cookies    = $request->getCookieParams();
+			$session_id = $cookies[$this->options['name']] ?? NULL;
 
 			if ($session_id) {
 				session_id($session_id);
 			}
 
 			if (session_start([$this->startOptions])) {
-				session_name($session_name);
-
 				$response = $handler->handle($request);
 
 				if (session_status() === PHP_SESSION_NONE) {
 					throw new RuntimeException('Session closed unexpectedly before response.');
 				}
 
-				$session_id = session_id();
-				$defaults   = array_change_key_case(session_get_cookie_params(), CASE_LOWER);
-				$options    = $this->options + $defaults;
-				$cookie     = SetCookie::create($session_name)
-					->withValue($session_id)
+				$defaults = array_change_key_case(session_get_cookie_params(), CASE_LOWER);
+				$options  = $this->options + $defaults;
+				$cookie   = SetCookie::create($this->options['name'])
+					->withValue(session_id())
 					->withPath($options['path'])
 					->withDomain($options['domain'])
 					->withSecure($options['secure'])

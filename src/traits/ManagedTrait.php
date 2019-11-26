@@ -21,6 +21,8 @@ trait ManagedTrait
 	public function setSessionManager(Manager $session): object
 	{
 		$this->session = $session;
+
+		return $this;
 	}
 
 
