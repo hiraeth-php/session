@@ -7,7 +7,7 @@ use RuntimeException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\MiddlewareInterface as Middleware;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
 use Dflydev\FigCookies\SetCookie;
@@ -16,7 +16,7 @@ use Dflydev\FigCookies\FigResponseCookies;
 /**
  * A middlware to start sessions
  */
-class StartMiddleware
+class StartMiddleware implements Middleware
 {
 	/**
 	 * The session cookie options.

@@ -2,7 +2,7 @@
 
 namespace Hiraeth\Session;
 
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\MiddlewareInterface as Middleware;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
 use Psr\Http\Message\ResponseInterface as Response;
@@ -12,7 +12,7 @@ use Psr\Http\Message\ResponseFactoryInterface as ResponseFactory;
 /**
  * {@inheritDoc}
  */
-class CsrfTokenMiddleware implements MiddlewareInterface, ManagedInterface
+class CsrfTokenMiddleware implements Middleware, ManagedInterface
 {
 	use ManagedTrait;
 
