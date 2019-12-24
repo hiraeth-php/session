@@ -36,12 +36,12 @@ class StartMiddlewareDelegate implements Hiraeth\Delegate
 	public function __invoke(Hiraeth\Application $app): object
 	{
 		return new StartMiddleware([
-			'lifetime' => $app->getEnvironment('SESSION.TTL', ini_get('session.cookie_lifetime')),
-			'httponly' => $app->getEnvironment('SESSION.HTTPONLY', ini_get('session.cookie_httponly')),
-			'domain'   => $app->getEnvironment('SESSION.DOMAIN', ini_get('session.cookie_domain')),
-			'secure'   => $app->getEnvironment('SESSION.SECURE', ini_get('session.cookie_secure')),
-			'path'     => $app->getEnvironment('SESSION.PATH', ini_get('session.cookie_path')),
-			'name'     => $app->getEnvironment('SESSION.NAME', ini_get('session.name'))
+			'lifetime' => $app->getEnvironment('SESSION_TTL',      ini_get('session.cookie_lifetime')),
+			'httponly' => $app->getEnvironment('SESSION_HTTPONLY', ini_get('session.cookie_httponly')),
+			'domain'   => $app->getEnvironment('SESSION_DOMAIN',   ini_get('session.cookie_domain')),
+			'secure'   => $app->getEnvironment('SESSION_SECURE',   ini_get('session.cookie_secure')),
+			'path'     => $app->getEnvironment('SESSION_PATH',     ini_get('session.cookie_path')),
+			'name'     => $app->getEnvironment('SESSION_NAME',     ini_get('session.name'))
 		]);
 	}
 }
