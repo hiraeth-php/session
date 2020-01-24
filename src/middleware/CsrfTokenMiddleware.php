@@ -21,7 +21,7 @@ class CsrfTokenMiddleware implements Middleware, ManagedInterface
 	 *
 	 * @var array
 	 */
-	protected static $methods = ['POST', 'PUT', 'DELETE'];
+	protected static $methods = ['POST', 'PUT', 'PATCH', 'DELETE'];
 
 
 	/**
@@ -47,13 +47,18 @@ class CsrfTokenMiddleware implements Middleware, ManagedInterface
 	 */
 	public function process(Request $request, RequestHandler $handler): Response
 	{
+
 		if ($this->hasSession() && in_array($request->getMethod(), static::$methods)) {
 
-			$csrf_value = $request->getParsedBody()['csrf::token'] ?? '';
 			$csrf_token = $this->session->getCsrfToken();
+			$csrf_value = $request->getHeaderLine('X-CSRF-Token');
+
+			if (!$csrf_value && isset($request->getParsedBody()['csrf::token'])) {
+				$csrf_value = $request->getParsedBody()['csrf::token'];
+			}
 
 			if (!$csrf_token->isValid($csrf_value)) {
-				return $this->factory->createResponse(400);
+				return $this->factory->createResponse(418);
 			}
 		}
 
