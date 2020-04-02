@@ -30,7 +30,7 @@ trait ManagedTrait
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setSessionManager(Manager $session): self
+	public function setSessionManager(Manager $session): ManagedInterface
 	{
 		$this->session = $session;
 
