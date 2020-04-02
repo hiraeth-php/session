@@ -20,7 +20,17 @@ trait ManagedTrait
 	/**
 	 * {@inheritDoc}
 	 */
-	public function setSessionManager(Manager $session): object
+	public function getSessionManager(): ?Manager
+	{
+		return $this->session;
+	}
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function setSessionManager(Manager $session): self
 	{
 		$this->session = $session;
 

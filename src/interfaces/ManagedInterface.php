@@ -8,7 +8,13 @@ namespace Hiraeth\Session;
 interface ManagedInterface
 {
 	/**
+	 * Get the session manager for this object
+	 */
+	public function getSessionManager(): ?Manager;
+
+
+	/**
 	 * Set the session manager for this object
 	 */
-	public function setSessionManager(Manager $session): object;
+	public function setSessionManager(Manager $session): self;
 }
