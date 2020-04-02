@@ -29,6 +29,7 @@ trait ManagedTrait
 
 	/**
 	 * {@inheritDoc}
+	 * TODO: Change return type to "self" for 7.4
 	 */
 	public function setSessionManager(Manager $session): ManagedInterface
 	{
