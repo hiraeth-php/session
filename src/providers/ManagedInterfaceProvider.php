@@ -22,6 +22,8 @@ class ManagedInterfaceProvider implements Hiraeth\Provider
 
 	/**
 	 * {@inheritDoc}
+	 *
+	 * @param ManagedInterface $instance
 	 */
 	public function __invoke(object $instance, Hiraeth\Application $app): object
 	{

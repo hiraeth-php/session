@@ -21,7 +21,7 @@ class StartMiddleware implements Middleware
 	/**
 	 * The session cookie options.
 	 *
-	 * @var array
+	 * @var array<string, mixed>
 	 */
 	protected $options = array();
 
@@ -29,7 +29,7 @@ class StartMiddleware implements Middleware
 	/**
 	 * Options to use when starting the session
 	 *
-	 * @var array
+	 * @var array<string, mixed>
 	 */
 	protected $startOptions = [
 		'use_cookies'      => FALSE,
@@ -41,7 +41,7 @@ class StartMiddleware implements Middleware
 	/**
 	 * Create a new instance of the middleware
 	 *
-	 * @param array $options The cookie options to use
+	 * @param array<string, mixed> $options The cookie options to use
 	 */
 	public function __construct(array $options = [])
 	{
@@ -78,7 +78,7 @@ class StartMiddleware implements Middleware
 				$defaults = array_change_key_case(session_get_cookie_params(), CASE_LOWER);
 				$options  = $this->options + $defaults;
 				$cookie   = SetCookie::create($this->options['name'])
-					->withValue(session_id())
+					->withValue(session_id() ?: NULL)
 					->withPath($options['path'])
 					->withDomain($options['domain'])
 					->withSecure($options['secure'])
@@ -98,5 +98,7 @@ class StartMiddleware implements Middleware
 
 			throw new RuntimeException('Failed to start session.');
 		}
+
+		return $handler->handle($request);
 	}
 }

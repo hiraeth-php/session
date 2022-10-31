@@ -19,7 +19,7 @@ class CsrfTokenMiddleware implements Middleware, ManagedInterface
 	/**
 	 * Methods which require CSRF validation
 	 *
-	 * @var array
+	 * @var string[]
 	 */
 	protected static $methods = ['POST', 'PUT', 'PATCH', 'DELETE'];
 
