@@ -10,6 +10,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\MiddlewareInterface as Middleware;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
+use Dflydev\FigCookies\Cookies;
 use Dflydev\FigCookies\SetCookie;
 use Dflydev\FigCookies\FigResponseCookies;
 
@@ -61,11 +62,11 @@ class StartMiddleware implements Middleware
 		}
 
 		if (session_status() !== PHP_SESSION_DISABLED) {
-			$cookies    = $request->getCookieParams();
-			$session_id = $cookies[$this->options['name']] ?? NULL;
+			$cookies    = Cookies::fromRequest($request);
+			$session_id = $cookies->get($this->options['name']);
 
 			if ($session_id) {
-				session_id($session_id);
+				session_id($session_id->getValue());
 			}
 
 			if (session_start($this->startOptions)) {
@@ -93,7 +94,6 @@ class StartMiddleware implements Middleware
 				session_write_close();
 
 				return FigResponseCookies::set($response, $cookie);
-
 			}
 
 			throw new RuntimeException('Failed to start session.');
