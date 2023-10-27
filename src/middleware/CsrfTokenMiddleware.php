@@ -51,11 +51,9 @@ class CsrfTokenMiddleware implements Middleware, ManagedInterface
 		if ($this->hasSession() && in_array($request->getMethod(), static::$methods)) {
 
 			$csrf_token = $this->session->getCsrfToken();
-			$csrf_value = $request->getHeaderLine('X-CSRF-Token');
-
-			if (!$csrf_value && isset($request->getParsedBody()['csrf::token'])) {
-				$csrf_value = $request->getParsedBody()['csrf::token'];
-			}
+			$csrf_value = $request->getHeaderLine('CSRF-Token');
+			$csrf_value = $csrf_value ?: $request->getHeaderLine('X-CSRF-Token');
+			$csrf_value = $csrf_value ?: $request->getParsedBody()['csrf::token'] ?? '';
 
 			if (!$csrf_token->isValid($csrf_value)) {
 				return $this->factory->createResponse(418);
