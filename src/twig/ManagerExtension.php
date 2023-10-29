@@ -15,7 +15,7 @@ class ManagerExtension extends Twig\Extension\AbstractExtension implements Sessi
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getFunctions()
+	public function getFunctions(): array
 	{
 		if ($this->hasSession()) {
 			return [new Twig\TwigFunction('session', function($name) {
@@ -32,7 +32,7 @@ class ManagerExtension extends Twig\Extension\AbstractExtension implements Sessi
 	 *
 	 * @return mixed[] array
 	 */
-	public function getGlobals()
+	public function getGlobals(): array
 	{
 		if ($this->hasSession()) {
 			return ['session' => $this->session];
