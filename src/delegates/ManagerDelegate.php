@@ -24,8 +24,8 @@ class ManagerDelegate implements Hiraeth\Delegate
 	 */
 	public function __invoke(Hiraeth\Application $app): object
 	{
-		$phpfunc = new Aura\Session\Phpfunc;
-		$randval = new Aura\Session\Randval($phpfunc);
+		$phpfunc = new Aura\Session\Phpfunc();
+		$randval = new Aura\Session\Randval();
 		$cookies = array();
 
 		return $app->share(new Manager(
