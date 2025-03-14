@@ -26,7 +26,7 @@ class ManagerDelegate implements Hiraeth\Delegate
 	{
 		$phpfunc = new Aura\Session\Phpfunc();
 		$randval = new Aura\Session\Randval();
-		$cookies = array();
+		$cookies = [];
 
 		return $app->share(new Manager(
 			 new Aura\Session\SegmentFactory,

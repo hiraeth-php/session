@@ -18,12 +18,13 @@ class ManagerExtension extends Twig\Extension\AbstractExtension implements Sessi
 	public function getFunctions(): array
 	{
 		if ($this->hasSession()) {
-			return [new Twig\TwigFunction('session', function($name) {
-				return $this->getSessionManager()->getSegment($name);
-			})];
+			return [new Twig\TwigFunction(
+				'session',
+				fn($name) => $this->getSessionManager()->getSegment($name)
+			)];
 		}
 
-		return array();
+		return [];
 	}
 
 
@@ -38,6 +39,6 @@ class ManagerExtension extends Twig\Extension\AbstractExtension implements Sessi
 			return ['session' => $this->session];
 		}
 
-		return array();
+		return [];
 	}
 }

@@ -24,7 +24,7 @@ class StartMiddleware implements Middleware
 	 *
 	 * @var array<string, mixed>
 	 */
-	protected $options = array();
+	protected $options = [];
 
 
 	/**

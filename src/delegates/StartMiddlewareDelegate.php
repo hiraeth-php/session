@@ -22,7 +22,7 @@ class StartMiddlewareDelegate implements Hiraeth\Delegate
 	/**
 	 * Create a new instance of the delegate
 	 */
-	public function __construct(SessionHandlerInterface $handler = NULL)
+	public function __construct(?SessionHandlerInterface $handler = NULL)
 	{
 		if ($handler) {
 			session_set_save_handler($handler);

@@ -16,7 +16,7 @@
         "dflydev/fig-cookies": "^3.0"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.0",
+        "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^10.0",
         "psr/http-server-middleware": "^1.0",
         "psr/http-server-handler": "^1.0",
